@@ -5,18 +5,7 @@
     
     <ul>
     {% for points in challenge.first_blood_bonus %}
-        <li>Bonus for {{ (loop.index0 + 1)|ordinalize }} solve: <b>{{ points }}</b></li>
+        <li>Thưởng <b>{{ points }} điểm</b> cho {{ (loop.index0 + 1)|ordinalize }} solve</li>
     {% endfor %}
     </ul>
-{% endblock %}
-
-{% block input %}
-    <input id="challenge-id" class="challenge-id" type="hidden" value="{{ challenge.id }}">
-    <input id="challenge-input" class="challenge-input" type="text" name="answer" placeholder="Flag"/>
-{% endblock %}
-
-{% block submit %}
-    <button id="challenge-submit" class="challenge-submit" type="submit">
-        Submit
-    </button>
 {% endblock %}

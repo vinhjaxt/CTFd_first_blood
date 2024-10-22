@@ -236,11 +236,12 @@ class FirstBloodValueChallenge(BaseChallenge):
 
 @event.listens_for(Session, "after_bulk_delete")
 def after_bulk_delete(delete_context):
-    if delete_context.primary_table.name == "solves":
+    if "first_blood_award" in delete_context.query:
+    # if delete_context.primary_table.name == "solves":
         # A batch delete of solves just occured
         # This usually means that CTFd is removing a user account
         # Why do they do this differently for users and teams? No idea ¯\_(ツ)_/¯
-        
+
         # Mark ALL first blood challenges for recalculation
         # TODO: It would probably be better to detect which solves got removed and which challenges are affected - but before_bulk_delete doesn't seem to be a thing and the rows are already removed by now
         for challenge in Challenges.query.filter_by(type="firstblood").all():
